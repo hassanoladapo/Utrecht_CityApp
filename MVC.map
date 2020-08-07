@@ -1,0 +1,69 @@
+MAP
+NAME "Utrecht"
+IMAGECOLOR 255 255 255
+SIZE 600 800
+IMAGETYPE PNG24
+PROJECTION
+	"init=epsg:28992" #latlon on WGS84
+END #default projection
+EXTENT 152527 378908 167391 389800 # lon/lat extents of Thailand
+WEB
+	METADATA
+		"ows_enable_request" "*"
+		"map" "d:/iishome/student/s2218216/Eindhoven/Eindh.map"
+		"ows_schemas_location" "http://schemas.opengeospatial.net"
+		"ows_title" "EindhovenWMS"
+		"ows_onlineresource" "https://gisedu.itc.utwente.nl/cgi-bin/mapserv.exe?map=d:/iishome/student/s2218216/Eindhoven/Eindh.map&"
+		"ows_srs" "EPSG:4326 EPSG:28992 EPSG:3857" #latlon
+		"wms_feature_info_mime_type" "text/plain"
+		"wms_feature_info_mime_type" "text/html"
+		"wms_server_version" "1.3.0"
+		"wms_formatlist" "image/png,image/gif,image/jpeg"
+		"wms_format" "image/png"
+	END #web metadata
+END #web
+LAYER
+	NAME "boundary"
+	TYPE POLYGON
+	STATUS ON
+	CONNECTIONTYPE postgis
+	CONNECTION "user=exercises password=exercises host=gisedu.itc.utwente.nl port=5432 dbname=exercises options='-c client_encoding=UTF8'"
+	DATA "geometry from s2292440.utrecht USING unique id USING srid=28992"
+	METADATA
+		"ows_title" "boundary"
+		"ows_extent" "152527 378908 167391 389800"
+	END #layer metadata
+	PROJECTION
+		"init=epsg:28992"
+	END #layer projection
+	CLASS
+		  NAME "boundary"
+		  STYLE
+			OUTLINECOLOR 71 50 99
+			WIDTH 7
+		  END #style
+		END #class
+END #layer forest
+LAYER
+	NAME "enschede_boundary"
+	TYPE POLYGON
+	STATUS ON
+	CONNECTIONTYPE postgis
+	CONNECTION "user=exercises password=exercises host=gisedu.itc.utwente.nl port=5432 dbname=exercises options='-c client_encoding=UTF8'"
+	DATA "geometry from s2292440.enschede USING unique id USING srid=28992"
+	METADATA
+		"ows_title" "enschede_boundary"
+		"ows_extent" "152527 378908 167391 389800"
+	END #layer metadata
+	PROJECTION
+		"init=epsg:28992"
+	END #layer projection
+	CLASS
+		  NAME "enschede_boundary"
+		  STYLE
+			OUTLINECOLOR 71 50 99
+			WIDTH 7
+		  END #style
+		END #class
+END #layer forest
+END #map
